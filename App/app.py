@@ -34,6 +34,7 @@ app = Flask(__name__)
 @app.route("/")
 def home():
     return(f"Welcome Home")
+    return render_template("index.html")
 
 
 
