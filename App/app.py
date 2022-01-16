@@ -9,7 +9,7 @@ from sqlalchemy import create_engine, func
 from flask import Flask, jsonify
 
 # Database Setup
-engine = create_engine('postgresql://postgres:7eUTEhM4!pRdxBG@localhost:5433/Rental and sale price')
+engine = create_engine('postgresql://postgres:{passwprd}@localhost:5432/Rental and sale price')
 
 # Reflect an existing database
 Base = automap_base()
