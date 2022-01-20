@@ -57,22 +57,49 @@ async function getHello(){
         collapsed: false
     }).addTo(map);
 
+/////////function for radius sizes for zips
+        //with high/low median rent and median sale price
+    function createFeatures(rentAndSaleCircles) {
+        function pointToLayer(feature, latlng) {
+            return L.circleMarker(latlng, 
+                {
+                //////EDIT THIS PART//////
+                    radius:getRadius(feature.properties.mag),
+                    fillColor: getColor(feature.geometry.coordinates[2]),
+                    color: getColor(feature.geometry.coordinates[2])
+                });
+        }    
 
+            // for rent price, bigger radius = higher rent price
+            // for sale price, darker color = higher sale price
+            function getColor(rentprice) {
+                return rentprice > 5000 ? '#6b030f' :
+                rentprice > 4000 ? '#a60719' :
+                rentprice > 3000 ? '#BD0026' :
+                rentprice > 2800 ? '#E31A1C' :
+                rentprice > 2400 ? '#fc342a' :
+                rentprice > 2000 ? '#FC4E2A' :
+                rentprice > 1800 ? '#FD8D3C' :
+                rentprice > 1500 ? '#FEB24C' :
+                rentprice > 1000 ? '#FED976' :
+                    2;
+            }
 
-// function createFeatures(rentData) {
-//     function onEachFeature(feature, layer) {
-//         layer.bindPopup(`<h3>${feature.properties.place}</h3><hr><p>${new Date(feature.properties.time)}</p>`);
-//     }
-//     function pointToLayer(feature, latlng) {
-//         return L.circleMarker(latlng, 
-//             {
-//                 radius:getRadius(feature.properties.mag),
-//                 fillColor: getColor(feature.geometry.coordinates[2]),
-//                 color: getColor(feature.geometry.coordinates[2])
-//             });
-//     }
-// }
-
-
+            function getRadius (saleprice) {
+                return saleprice > 1044978 ? '#6b030f' :
+                saleprice > 1000000 ? '#a60719' :
+                saleprice > 800000  ? '#BD0026' :
+                saleprice > 700000  ? '#E31A1C' :
+                saleprice > 600000  ? '#fc342a' :
+                saleprice > 500000  ? '#FC4E2A' :
+                saleprice > 400000   ? '#FD8D3C' :
+                saleprice > 300000   ? '#FEB24C' :
+                saleprice > 200000   ? '#FED976' :
+                    '#FFEDA0';
+            }
+        var earthquakes = L.geoJSON(rentAndSaleCircles, {
+            pointToLayer: pointToLayer
+        }).addTo(myMap);
+    }
 }
 getHello();
