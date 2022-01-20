@@ -7,7 +7,38 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 <body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 jumbotron text-center">
+                <h1>Rent or Buy: Real-Estate Ananlysis</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                <!-- <div class="well">
+                    <h3>Info by Zip</h3>
+                    <select id="selDataset" onchange="optionChanged(this.value)">
+                    </select>
+                </div> -->
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Price Info</h3>
+                    </div>
+                    <div id="sample-metadata" class="panel-body"></div>
+                </div>
+            </div>
+            
+            <div id="map" style = "width: 600px; height: 400px"></div>
+            
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div id="line"></div>
+            </div>
+        </div>
+    </div>
     
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <script src= "./static/js/logic.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
