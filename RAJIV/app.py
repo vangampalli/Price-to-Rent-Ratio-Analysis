@@ -4,16 +4,12 @@ import numpy as np
 import sqlalchemy
 from sqlalchemy.ext.automap import automap_base
 from sqlalchemy.orm import Session
-from sqlalchemy import create_engine, func
+from sqlalchemy import create_engine, func, inspect 
 
-from flask import Flask, jsonify, render_template
+from flask import Flask, jsonify, render_template,url_for
 
 # Database Setup
-<<<<<<< HEAD
 engine = create_engine('postgresql://postgres:postgres@localhost:5432/Rental and sale price')
-=======
-engine = create_engine('postgresql://postgres:7eUTEhM4!pRdxBG@localhost:5433/Rental and sale price')
->>>>>>> 48b500627e7ff7217f9d2d34c8fa9f95071bae0e
 
 # Reflect an existing database
 Base = automap_base()
@@ -22,8 +18,9 @@ Base = automap_base()
 Base.prepare(engine, reflect=True)
 
 # Save References to Tables
-View = Base.classes.lats_long_df
-
+View = Base.classes.lats_long2_df
+#insp=inspect(engine)
+#print (insp.get_table_names())
 # Create Session
 session = Session(engine)
 
