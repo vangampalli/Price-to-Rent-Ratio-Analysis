@@ -13,7 +13,7 @@ from flask import Flask, jsonify, render_template
 engine = create_engine('postgresql://postgres:{password}@localhost:5432/Rental and sale price')
 =======
 engine = create_engine('postgresql://postgres:{password}@localhost:5433/Rental and sale price')
->>>>>>> 48b500627e7ff7217f9d2d34c8fa9f95071bae0e
+>>>>>>> 
 
 # Reflect an existing database
 Base = automap_base()
