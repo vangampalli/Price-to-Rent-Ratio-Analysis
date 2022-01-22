@@ -71,22 +71,10 @@ GROUP BY random_and_sales.zipcode
     , random_and_sales.medianprice
 ;
 
-------joining rental and sales tables-----
-CREATE VIEW sales_and_rental AS
-SELECT rental_data.zipcode
-    , rental_data.avgprice
-    , home_prices_df.medianprice
-FROM rental_data
-JOIN home_prices_df
-ON home_prices_df.zipcode = rental_data.zipcode
-GROUP BY rental_data.zipcode
-    , rental_data.avgprice
-    , home_prices_df.medianprice
-;
-
 SELECT *
-FROM sales_and_rental
-----price to rent ratio = median sale/median annual rent
+FROM sales_and_rental;
+
+---price to rent ratio-----
 CREATE VIEW pricetorentratio AS
 SELECT zipcode
     , sales_and_rental.medianprice/(sales_and_rental.avgprice*12) as ratio
@@ -101,9 +89,38 @@ select  zipcode
 FROM pricetorentratio;
 select *
 FROM pricetorent_rounded
--- ALTER TABLE sales_and_rental
--- ADD (sales_and_rental.medianprice)/(sales_and_rental.avgprice*12) AS ratio
 
+---combining sales_and_rental and pricetorent_rounded----
+CREATE VIEW main_view AS
+SELECT sales_and_rental.zipcode
+    , sales_and_rental.city
+    , sales_and_rental.county 
+    , sales_and_rental.population 
+    , sales_and_rental.medianprice 
+    , sales_and_rental.activelistingcount
+	, sales_and_rental.avgprice
+	, sales_and_rental.totalrentals
+    , pricetorent_rounded.ratio
+FROM sales_and_rental
+JOIN pricetorent_rounded
+ON sales_and_rental.zipcode = pricetorent_rounded.zipcode
+GROUP BY sales_and_rental.zipcode
+    , sales_and_rental.city
+    , sales_and_rental.county 
+    , sales_and_rental.population 
+    , sales_and_rental.medianprice 
+	, sales_and_rental.avgprice
+    , sales_and_rental.activelistingcount
+	, sales_and_rental.totalrentals
+    , pricetorent_rounded.ratio
+;
 
+select *
+from main_view;
 
+select *
+INTO main_view2
+FROM main_view
 
+select *
+from main_view2
