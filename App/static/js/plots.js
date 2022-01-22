@@ -3,17 +3,13 @@ async function main(){
     const rentData = await dataResponse.json();
     console.log(rentData);
 
-<<<<<<< HEAD
     // Create Empty Arrays to be Populates
-=======
->>>>>>> 48b500627e7ff7217f9d2d34c8fa9f95071bae0e
     fullData = [];
 
     xData = [];
     yData = [];
     zData = [];
 
-<<<<<<< HEAD
     // Create a For Loop to Append Arrays
     for (let index = 0; index < rentData.length; index++) {
         let plotData = rentData[index]
@@ -27,19 +23,6 @@ async function main(){
     };
 
     // Create Dictionary of the Arrays
-=======
-    for (let index = 0; index < rentData.length; index++) {
-        let plotData = rentData[index]
-
-        let yRatio = (plotData.ratio) * 5000;
-
-        xData.push(plotData.city);
-        yData.push(yRatio);
-        zData.push(plotData.population);
-
-    };
-
->>>>>>> 48b500627e7ff7217f9d2d34c8fa9f95071bae0e
     let dataDict = {
         "city": xData,
         "ratio": yData,
@@ -48,13 +31,12 @@ async function main(){
 
     fullData.push(dataDict);
 
-<<<<<<< HEAD
     // Create Variables for Plots
     let xCities = fullData[0].city;
-    let yRatios = fullData[0].ratio;
-    let zPops = fullData[0].population.sort((a,b) => b-a);
+    let yRatios = fullData[0].ratio.sort((a,b) => b-a).reverse();
+    let zPops = fullData[0].population;
 
-    console.log(zPops);
+    console.log(yRatios);
 
     // Plot Bar Graph
     let trace1 = {
@@ -65,22 +47,24 @@ async function main(){
         text: yRatios
     };
 
-    // Scatter Plot Graph
+    // Plot Bar 2 Graph
     let trace2 = {
         x: xCities,
         y: zPops,
         name: "Population",
         text: xCities,
-        type: "bar",
+        type: "bar"
     }
 
     //Ploting Plotly
     let traceData = [trace1, trace2];
 
     let layout = {
-        title: "Population of Home to Rent Ratio",
-        yaxis: {title: "Price to Rent Ratio"},
+        title: "Population and Home to Rent Ratio",
         barmode: "group",
+        yaxis: {
+            visible: false,
+        },
         legend: {
             x: 1,
             xanchor: 'right',
@@ -91,29 +75,5 @@ async function main(){
     };
 
     Plotly.newPlot("line", traceData, layout);
-=======
-    console.log(fullData);
-
-    
-
-    // Plot Bar Graph
-    let trace1 = {
-        x: xData,
-        y: yData,
-        type: "bar",
-        text: xData
-    };
-
-    let trace2 = {
-        x: xData,
-        y: zData,
-        mode: 'lines',
-        text: xData
-    }
-
-    let traceData = [trace1, trace2];
-
-    Plotly.newPlot("line", traceData);
->>>>>>> 48b500627e7ff7217f9d2d34c8fa9f95071bae0e
 }
 main();
